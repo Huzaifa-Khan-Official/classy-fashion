@@ -1,5 +1,10 @@
 const containerDiv = document.querySelector(".containerDiv")
-const home = document.querySelector("#home")
+const cartList = document.querySelector(".cartList")
+const home = document.querySelector("#home");
+const cartNoPara = document.querySelector("#cartNo");
+let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || []; // geting cartProductIds from storage
+
+let cartQuant = cartProductIds.length;
 
 const homeFunc = () => {
     fetch('https://fakestoreapi.com/products')
@@ -20,25 +25,35 @@ const homeFunc = () => {
                 const productImg = currentProduct.image;
                 const productDesc = currentProduct.description.slice(0, 100);
                 const productCategory = currentProduct.category;
-                const productRating = Math.ceil(currentProduct.rating.rate);
+                const productRating = Math.round(currentProduct.rating.rate);
+                const productRatingCount = currentProduct.rating.count;
                 let ratingIcons;
+
+                // rating 1
                 if (productRating == 1) {
                     ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
                 } else if (productRating == 2) {
+                    // rating 2
                     ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
                 } else if (productRating == 3) {
+                    // rating 3
                     ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
                 } else if (productRating == 4) {
+                    // rating 4
                     ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
                 } else if (productRating == 5) {
+                    // rating 5
                     ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i>`
                 } else {
+                    // rating 0
                     ratingIcons = `<i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
                 }
-                const productRatingCount = currentProduct.rating.count;
+
                 containerDiv.innerHTML += `
                     <div class="card">
-                        <img src="${productImg}" class="card-img-top" alt="...">
+                        <div class="p-2">                        
+                            <img src="${productImg}" class="card-img-top" alt="...">
+                        </div>
                         <div class="card-body">
                             <div class="titleDiv">                    
                                 <h6 class="card-title">${productTitle}</h6>
@@ -49,9 +64,9 @@ const homeFunc = () => {
                             <div class="descDiv">                    
                                 <p class="card-text">${productDesc}...</p>
                             </div>
-                            <div><p>${ratingIcons} (${productRatingCount})</p></div>
+                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
                             <div class="btnDiv mt-3">                    
-                                <a href="#" class="btn btn-primary">Add to chart</a>
+                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
                             </div>
                         </div>
                     </div>
@@ -252,3 +267,65 @@ womensClothing.addEventListener("click", () => {
         })
         .catch(err => console.log(err));
 })
+
+
+function addToChart(productId) {
+    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
+    let singleProduct = {
+        productId: productId
+    }
+    cartProductIds.push(singleProduct)
+    localStorage.setItem("cartProductIds", JSON.stringify(cartProductIds))
+
+
+    let cartQuant = cartProductIds.length;
+    cartNoPara.style.display = "flex";
+    cartNoPara.innerHTML = `${cartQuant}`
+}
+
+if (cartQuant) {
+    cartNoPara.style.display = "flex";
+    cartNoPara.innerHTML = `${cartQuant}`
+}
+
+const cartBtn = document.getElementById("cartBtn");
+let cartTotalPrice = 0;
+
+cartBtn.addEventListener("click", () => {
+    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
+    let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
+
+    cartProductIds.forEach((currCartProduct) => {
+        fetch(`https://fakestoreapi.com/products/${currCartProduct.productId}`)
+            .then(res => res.json())
+            .then(data => {
+                const currentProduct = data
+                const cartProductImg = currentProduct.image;
+                const cartProductTitle = currentProduct.title;
+                const cartProductPrice = currentProduct.price;
+                cartTotalPrice += cartProductPrice;
+
+                cartList.innerHTML += `
+                <li class="cartProductList mt-3">
+                    <div class="cartProductDetailDiv">
+                        <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
+                        <div class="cartProductImgDiv">
+                            <img src="${cartProductImg}" alt="">
+                        </div>
+                        <div class="cartProductTitle">
+                            <p id="cartProductTitlePara">${cartProductTitle}</p>
+                        </div>
+                    </div>
+                    <div class="cartProductPrice">
+                        <p id="cartProductPricePara">$${cartProductPrice}</p>
+                    </div>
+                </li>
+                `
+                cartTotalPricePara.innerHTML = `$${cartTotalPrice}`
+            })
+            .catch(err => console.log(err));
+    });
+})
+
+
+window.addToChart = addToChart
