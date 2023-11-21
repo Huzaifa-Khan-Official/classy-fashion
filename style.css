@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.containerDiv  {
+.containerDiv {
     padding: 0 10px;
 }
 
@@ -35,4 +35,31 @@
 
 .navbar-collapse {
     justify-content: space-between;
+}
+
+.nav-link, .nav-link.active .nav-link{
+    position: relative;
+}
+
+#line::before,
+.nav-link.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: #4B1EB1;
+    transition: width 0.9s ease;
+}
+
+.nav-item:hover #line::before,
+.nav-link.active::before {
+    width: 80%;
+}
+
+.nav-item:hover a, .nav-link.active {
+    color: #4B1EB1 !important;
+    /* #18C8A8 */
 }
