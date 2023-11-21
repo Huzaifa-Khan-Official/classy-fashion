@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerDiv  {
+    padding: 0 10px;
+}
+
+.card {
+    width: 200px;
+}
+
+.card img {
+    height: 250px;
+}
+
+.card p {
+    word-break: break-all;
+}
+
+.titleDiv {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.descDiv {
+    height: 150px;
+}
+
+.nav-item a {
+    cursor: pointer;
+}
+
+.navbar-collapse {
+    justify-content: space-between;
+}
