@@ -405,8 +405,8 @@ const cartBtn = document.getElementById("cartBtn");
 let cartTotalPrice = 0;
 
 cartBtn.addEventListener("click", () => {
+    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
     console.log(cartProductIds);
-    // let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
     let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
 
     cartProductIds.forEach((currCartProduct) => {
