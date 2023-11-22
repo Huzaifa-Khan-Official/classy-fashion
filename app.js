@@ -6,6 +6,19 @@ let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || []; /
 
 let cartQuant = cartProductIds.length;
 
+let ratingZero = `<i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
+
+let ratingOne = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
+
+let ratingTwo = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
+
+let ratingThree = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
+
+let ratingFour = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
+
+
+let ratingFive = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i>`;
+
 const homeFunc = () => {
     fetch('https://fakestoreapi.com/products')
         .then(res => res.json())
@@ -31,22 +44,22 @@ const homeFunc = () => {
 
                 // rating 1
                 if (productRating == 1) {
-                    ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingOne;
                 } else if (productRating == 2) {
                     // rating 2
-                    ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingTwo;
                 } else if (productRating == 3) {
                     // rating 3
-                    ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingThree;
                 } else if (productRating == 4) {
                     // rating 4
-                    ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingFour;
                 } else if (productRating == 5) {
                     // rating 5
-                    ratingIcons = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingFive;
                 } else {
                     // rating 0
-                    ratingIcons = `<i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`
+                    ratingIcons = ratingZero;
                 }
 
                 containerDiv.innerHTML += `
@@ -107,27 +120,52 @@ electronics.addEventListener("click", () => {
                 const productImg = currentProduct.image;
                 const productDesc = currentProduct.description.slice(0, 100);
                 const productCategory = currentProduct.category;
-                const productRating = currentProduct.rating.rate;
+                const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
+                let ratingIcons;
+
+                // rating 1
+                if (productRating == 1) {
+                    ratingIcons = ratingOne;
+                } else if (productRating == 2) {
+                    // rating 2
+                    ratingIcons = ratingTwo;
+                } else if (productRating == 3) {
+                    // rating 3
+                    ratingIcons = ratingThree;
+                } else if (productRating == 4) {
+                    // rating 4
+                    ratingIcons = ratingFour;
+                } else if (productRating == 5) {
+                    // rating 5
+                    ratingIcons = ratingFive;
+                } else {
+                    // rating 0
+                    ratingIcons = ratingZero;
+                }
+
                 containerDiv.innerHTML += `
-            <div class="card">
-                <img src="${productImg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="titleDiv">                    
-                        <h6 class="card-title">${productTitle}</h6>
+                    <div class="card">
+                        <div class="p-2">                        
+                            <img src="${productImg}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <div class="titleDiv">                    
+                                <h6 class="card-title">${productTitle}</h6>
+                            </div>
+                            <div>
+                                <h5 class="card-title">$${productPrice}</h5>
+                            </div>
+                            <div class="descDiv">                    
+                                <p class="card-text">${productDesc}...</p>
+                            </div>
+                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
+                            <div class="btnDiv mt-3">                    
+                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="card-title">$${productPrice}</h5>
-                    </div>
-                    <div class="descDiv">                    
-                        <p class="card-text">${productDesc}...</p>
-                    </div>
-                    <div class="btnDiv mt-3">                    
-                        <a href="#" class="btn btn-primary">Add to chart</a>
-                    </div>
-                </div>
-            </div>
-            `
+                `
             });
         })
         .catch(err => console.log(err));
@@ -152,27 +190,52 @@ jewelery.addEventListener("click", () => {
                 const productImg = currentProduct.image;
                 const productDesc = currentProduct.description.slice(0, 100);
                 const productCategory = currentProduct.category;
-                const productRating = currentProduct.rating.rate;
+                const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
+                let ratingIcons;
+
+                // rating 1
+                if (productRating == 1) {
+                    ratingIcons = ratingOne;
+                } else if (productRating == 2) {
+                    // rating 2
+                    ratingIcons = ratingTwo;
+                } else if (productRating == 3) {
+                    // rating 3
+                    ratingIcons = ratingThree;
+                } else if (productRating == 4) {
+                    // rating 4
+                    ratingIcons = ratingFour;
+                } else if (productRating == 5) {
+                    // rating 5
+                    ratingIcons = ratingFive;
+                } else {
+                    // rating 0
+                    ratingIcons = ratingZero;
+                }
+
                 containerDiv.innerHTML += `
-            <div class="card">
-                <img src="${productImg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="titleDiv">                    
-                        <h6 class="card-title">${productTitle}</h6>
+                    <div class="card">
+                        <div class="p-2">                        
+                            <img src="${productImg}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <div class="titleDiv">                    
+                                <h6 class="card-title">${productTitle}</h6>
+                            </div>
+                            <div>
+                                <h5 class="card-title">$${productPrice}</h5>
+                            </div>
+                            <div class="descDiv">                    
+                                <p class="card-text">${productDesc}...</p>
+                            </div>
+                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
+                            <div class="btnDiv mt-3">                    
+                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="card-title">$${productPrice}</h5>
-                    </div>
-                    <div class="descDiv">                    
-                        <p class="card-text">${productDesc}...</p>
-                    </div>
-                    <div class="btnDiv mt-3">                    
-                        <a href="#" class="btn btn-primary">Add to chart</a>
-                    </div>
-                </div>
-            </div>
-            `
+                `
             });
         })
         .catch(err => console.log(err));
@@ -197,27 +260,52 @@ mensClothing.addEventListener("click", () => {
                 const productImg = currentProduct.image;
                 const productDesc = currentProduct.description.slice(0, 100);
                 const productCategory = currentProduct.category;
-                const productRating = currentProduct.rating.rate;
+                const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
+                let ratingIcons;
+
+                // rating 1
+                if (productRating == 1) {
+                    ratingIcons = ratingOne;
+                } else if (productRating == 2) {
+                    // rating 2
+                    ratingIcons = ratingTwo;
+                } else if (productRating == 3) {
+                    // rating 3
+                    ratingIcons = ratingThree;
+                } else if (productRating == 4) {
+                    // rating 4
+                    ratingIcons = ratingFour;
+                } else if (productRating == 5) {
+                    // rating 5
+                    ratingIcons = ratingFive;
+                } else {
+                    // rating 0
+                    ratingIcons = ratingZero;
+                }
+
                 containerDiv.innerHTML += `
-            <div class="card">
-                <img src="${productImg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="titleDiv">                    
-                        <h6 class="card-title">${productTitle}</h6>
+                    <div class="card">
+                        <div class="p-2">                        
+                            <img src="${productImg}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <div class="titleDiv">                    
+                                <h6 class="card-title">${productTitle}</h6>
+                            </div>
+                            <div>
+                                <h5 class="card-title">$${productPrice}</h5>
+                            </div>
+                            <div class="descDiv">                    
+                                <p class="card-text">${productDesc}...</p>
+                            </div>
+                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
+                            <div class="btnDiv mt-3">                    
+                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="descDiv">                    
-                        <p class="card-text">${productDesc}...</p>
-                    </div>
-                    <div>
-                        <h5 class="card-title">$${productPrice}</h5>
-                    </div>
-                    <div class="btnDiv mt-3">                    
-                        <a href="#" class="btn btn-primary">Add to chart</a>
-                    </div>
-                </div>
-            </div>
-            `
+                `
             });
         })
         .catch(err => console.log(err));
@@ -242,27 +330,52 @@ womensClothing.addEventListener("click", () => {
                 const productImg = currentProduct.image;
                 const productDesc = currentProduct.description.slice(0, 100);
                 const productCategory = currentProduct.category;
-                const productRating = currentProduct.rating.rate;
+                const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
+                let ratingIcons;
+
+                // rating 1
+                if (productRating == 1) {
+                    ratingIcons = ratingOne;
+                } else if (productRating == 2) {
+                    // rating 2
+                    ratingIcons = ratingTwo;
+                } else if (productRating == 3) {
+                    // rating 3
+                    ratingIcons = ratingThree;
+                } else if (productRating == 4) {
+                    // rating 4
+                    ratingIcons = ratingFour;
+                } else if (productRating == 5) {
+                    // rating 5
+                    ratingIcons = ratingFive;
+                } else {
+                    // rating 0
+                    ratingIcons = ratingZero;
+                }
+
                 containerDiv.innerHTML += `
-            <div class="card">
-                <img src="${productImg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="titleDiv">                    
-                        <h6 class="card-title">${productTitle}</h6>
+                    <div class="card">
+                        <div class="p-2">                        
+                            <img src="${productImg}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <div class="titleDiv">                    
+                                <h6 class="card-title">${productTitle}</h6>
+                            </div>
+                            <div>
+                                <h5 class="card-title">$${productPrice}</h5>
+                            </div>
+                            <div class="descDiv">                    
+                                <p class="card-text">${productDesc}...</p>
+                            </div>
+                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
+                            <div class="btnDiv mt-3">                    
+                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="card-title">$${productPrice}</h5>
-                    </div>
-                    <div class="descDiv">                    
-                        <p class="card-text">${productDesc}...</p>
-                    </div>
-                    <div class="btnDiv mt-3">                    
-                        <a href="#" class="btn btn-primary">Add to chart</a>
-                    </div>
-                </div>
-            </div>
-            `
+                `
             });
         })
         .catch(err => console.log(err));
@@ -292,7 +405,8 @@ const cartBtn = document.getElementById("cartBtn");
 let cartTotalPrice = 0;
 
 cartBtn.addEventListener("click", () => {
-    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
+    console.log(cartProductIds);
+    // let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
     let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
 
     cartProductIds.forEach((currCartProduct) => {
