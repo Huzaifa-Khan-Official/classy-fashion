@@ -16,6 +16,8 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+let userUid = localStorage.getItem("uniqueId");
+
 function generateRandomId() {
     // Get the current timestamp
     const timestamp = new Date().getTime();
@@ -29,7 +31,12 @@ function generateRandomId() {
     return randomId;
 }
 
+if (!userUid) {
+    userUid = generateRandomId();
+    localStorage.setItem("uniqueId", userUid);
+}
 
+console.log(localStorage.getItem("uniqueId"));
 const cartNoPara = document.querySelector("#cartNo");
 
 
