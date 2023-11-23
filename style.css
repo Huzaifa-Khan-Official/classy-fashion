@@ -64,13 +64,21 @@ p {
 
 .nav-item:hover a, .nav-link.active {
     color: #4B1EB1 !important;
-    /* #18C8A8 */
 }
 
 .cartDiv li {
     border-top: .1px solid #c2bfbf;
     border-radius: 5px;
     box-shadow: 0px 5px 5px 0px #787878;
+}
+
+.cartDiv button {
+    border: none;
+    background: transparent;
+}
+
+.cartDiv button:not([disabled]):hover {
+    color: #4B1EB1 !important;
 }
 
 #cartNo {
@@ -136,4 +144,16 @@ p {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+}
+
+.cartProductPrice {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+#xMark i:hover{
+    cursor: pointer;
+    color: #d02c2c !important;
+    transform: scale(1.2);
 }

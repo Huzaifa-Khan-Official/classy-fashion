@@ -58,28 +58,6 @@ const homeFunc = () => {
                     ratingIcons = ratingZero;
                 }
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
-                // containerDiv.innerHTML += `
-                //     <div class="card">
-                //         <div class="p-2">                        
-                //             <img src="${productImg}" class="card-img-top" alt="...">
-                //         </div>
-                //         <div class="card-body">
-                //             <div class="titleDiv">                    
-                //                 <h6 class="card-title">${productTitle}</h6>
-                //             </div>
-                //             <div>
-                //                 <h5 class="card-title">$${productPrice}</h5>
-                //             </div>
-                //             <div class="descDiv">                    
-                //                 <p class="card-text">${productDesc}...</p>
-                //             </div>
-                //             <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                //             <div class="btnDiv mt-3">                    
-                //                 <button class="btn btn-primary" onclick="addToChart(${productId}, '${productTitle}', '${productPrice}', '${productImg}')">Add to chart</button>
-                //             </div>
-                //         </div>
-                //     </div>
-                // `
             });
         })
         .catch(err => console.log(err));
@@ -140,28 +118,7 @@ electronics.addEventListener("click", () => {
                     ratingIcons = ratingZero;
                 }
 
-                containerDiv.innerHTML += `
-                    <div class="card">
-                        <div class="p-2">                        
-                            <img src="${productImg}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <div class="titleDiv">                    
-                                <h6 class="card-title">${productTitle}</h6>
-                            </div>
-                            <div>
-                                <h5 class="card-title">$${productPrice}</h5>
-                            </div>
-                            <div class="descDiv">                    
-                                <p class="card-text">${productDesc}...</p>
-                            </div>
-                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                            <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
-                            </div>
-                        </div>
-                    </div>
-                `
+                displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
         })
         .catch(err => console.log(err));
@@ -210,28 +167,7 @@ jewelery.addEventListener("click", () => {
                     ratingIcons = ratingZero;
                 }
 
-                containerDiv.innerHTML += `
-                    <div class="card">
-                        <div class="p-2">                        
-                            <img src="${productImg}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <div class="titleDiv">                    
-                                <h6 class="card-title">${productTitle}</h6>
-                            </div>
-                            <div>
-                                <h5 class="card-title">$${productPrice}</h5>
-                            </div>
-                            <div class="descDiv">                    
-                                <p class="card-text">${productDesc}...</p>
-                            </div>
-                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                            <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
-                            </div>
-                        </div>
-                    </div>
-                `
+                displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
         })
         .catch(err => console.log(err));
@@ -280,28 +216,7 @@ mensClothing.addEventListener("click", () => {
                     ratingIcons = ratingZero;
                 }
 
-                containerDiv.innerHTML += `
-                    <div class="card">
-                        <div class="p-2">                        
-                            <img src="${productImg}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <div class="titleDiv">                    
-                                <h6 class="card-title">${productTitle}</h6>
-                            </div>
-                            <div>
-                                <h5 class="card-title">$${productPrice}</h5>
-                            </div>
-                            <div class="descDiv">                    
-                                <p class="card-text">${productDesc}...</p>
-                            </div>
-                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                            <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
-                            </div>
-                        </div>
-                    </div>
-                `
+                displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
         })
         .catch(err => console.log(err));
@@ -350,28 +265,7 @@ womensClothing.addEventListener("click", () => {
                     ratingIcons = ratingZero;
                 }
 
-                containerDiv.innerHTML += `
-                    <div class="card">
-                        <div class="p-2">                        
-                            <img src="${productImg}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <div class="titleDiv">                    
-                                <h6 class="card-title">${productTitle}</h6>
-                            </div>
-                            <div>
-                                <h5 class="card-title">$${productPrice}</h5>
-                            </div>
-                            <div class="descDiv">                    
-                                <p class="card-text">${productDesc}...</p>
-                            </div>
-                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                            <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
-                            </div>
-                        </div>
-                    </div>
-                `
+                displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
         })
         .catch(err => console.log(err));
@@ -379,25 +273,25 @@ womensClothing.addEventListener("click", () => {
 
 const displayCards = (productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount) => {
     containerDiv.innerHTML += `
-                    <div class="card">
-                        <div class="p-2">                        
-                            <img src="${productImg}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <div class="titleDiv">                    
-                                <h6 class="card-title">${productTitle}</h6>
-                            </div>
-                            <div>
-                                <h5 class="card-title">$${productPrice}</h5>
-                            </div>
-                            <div class="descDiv">                    
-                                <p class="card-text">${productDesc}...</p>
-                            </div>
-                            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
-                            <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId}, '${productTitle}', '${productPrice}', '${productImg}')">Add to chart</button>
-                            </div>
-                        </div>
-                    </div>
-                `
-}
+    <div class="card">
+        <div class="p-2">                        
+            <img src="${productImg}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <div class="titleDiv">                    
+                <h6 class="card-title">${productTitle}</h6>
+            </div>
+            <div>
+                <h5 class="card-title">$${productPrice}</h5>
+            </div>
+            <div class="descDiv">                    
+                <p class="card-text">${productDesc}...</p>
+            </div>
+            <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
+            <div class="btnDiv mt-3">                    
+                <button class="btn btn-primary" onclick="addToChart(${productId}, '${productTitle.replace(/'/g, "\\'")}', '${productPrice}', '${productImg.replace(/'/g, "\\'")}')">Add to chart</button>
+            </div>
+        </div>
+    </div>
+    `;
+};

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB4N3Fq_hCmbongv16YOU1AlVxufh-I730",
@@ -18,6 +18,7 @@ const db = getFirestore(app);
 
 let uniqueId = localStorage.getItem("uniqueId");
 const cartNoPara = document.querySelector("#cartNo");
+const btn = document.querySelector("#btn");
 const cartBtn = document.getElementById("cartBtn");
 let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
 const cartList = document.querySelector(".cartList")
@@ -45,15 +46,16 @@ const getCarts = () => {
     onSnapshot(collection(db, uniqueId), (data) => {
         cartQuant = data.size;
         if (cartQuant) {
+            btn.disabled = false
             cartNoPara.style.display = "flex";
             cartNoPara.innerHTML = `${cartQuant}`
+        } else {
+            cartNoPara.style.display = "none";
         }
     })
 }
 
 getCarts();
-
-
 
 async function addToChart(productId, productTitle, productPrice, productImg) {
     try {
@@ -81,34 +83,54 @@ cartBtn.addEventListener("click", () => {
     onSnapshot(collection(db, uniqueId), (data) => {
         cartQuant = data.size;
         if (cartQuant) {
+            btn.disabled = false
             data.docChanges().forEach((singleCartProduct) => {
-                const cartProductImg = singleCartProduct.doc.data().productImg;
-                const cartProductTitle = singleCartProduct.doc.data().productTitle;
                 const cartProductPrice = +singleCartProduct.doc.data().productPrice;
-                cartTotalPrice += cartProductPrice;
+                if (singleCartProduct.type === "added") {
+                    const cartProductId = singleCartProduct.doc.data().productId;
+                    const cartProductImg = singleCartProduct.doc.data().productImg;
+                    const cartProductTitle = singleCartProduct.doc.data().productTitle;
+                    cartTotalPrice += cartProductPrice;
 
-                cartList.innerHTML += `
-                <li class="cartProductList mt-3">
-                    <div class="cartProductDetailDiv">
-                        <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
-                        <div class="cartProductImgDiv">
-                            <img src=${cartProductImg} alt="">
+                    cartList.innerHTML += `
+                    <li class="cartProductList mt-3" id="${singleCartProduct.doc.id}">
+                        <div class="cartProductDetailDiv">
+                            <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
+                            <div class="cartProductImgDiv">
+                                <img src=${cartProductImg} alt="">
+                            </div>
+                            <div class="cartProductTitle">
+                                <p id="cartProductTitlePara">${cartProductTitle}</p>
+                            </div>
                         </div>
-                        <div class="cartProductTitle">
-                            <p id="cartProductTitlePara">${cartProductTitle}</p>
+                        <div class="cartProductPrice">
+                            <p id="cartProductPricePara">$${cartProductPrice.toFixed(2)}</p>
+                            <p id="xMark" onclick="delCartProduct('${singleCartProduct.doc.id}')"><i class="fa-solid fa-xmark fa-lg" style="color: #f55555;"></i></p>
                         </div>
-                    </div>
-                    <div class="cartProductPrice">
-                        <p id="cartProductPricePara">$${cartProductPrice.toFixed(2)}</p>
-                    </div>
-                </li>
-                `
-                cartTotalPricePara.innerHTML = `$${cartTotalPrice}`
+                    </li>
+                    `
+
+                } else if (singleCartProduct.type === "removed") {
+                    let delLi = document.getElementById(singleCartProduct.doc.id)
+                    if (delLi) {
+                        delLi.remove()
+                    }
+                    cartTotalPrice -= cartProductPrice;
+                }
+                cartTotalPricePara.innerHTML = `$${cartTotalPrice.toFixed(2)}`
             })
+        } else {
+            $('#addChartCanvas').offcanvas('hide');
+            btn.disabled = true;
         }
-
     })
 
 })
 
+async function delCartProduct(id) {
+    await deleteDoc(doc(db, uniqueId, id));
+}
+
+
 window.addToChart = addToChart
+window.delCartProduct = delCartProduct

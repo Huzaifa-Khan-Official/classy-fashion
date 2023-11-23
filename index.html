@@ -46,11 +46,14 @@
                     </div>
                     <div class="cartDiv">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"  data-bs-toggle="offcanvas" href="#addChartCanvas" role="button"
-                            aria-controls="addChartCanvas">
+                            <li class="nav-item">
                                 <a class="nav-link" id="cartBtn">
-                                    <p id="cartNo"></p><i class="fa-solid fa-cart-shopping" style="color: #4B1EB1;"></i>
-                                    My Cart
+                                    <button id="btn" disabled data-bs-toggle="offcanvas" href="#addChartCanvas" role="button"
+                                    aria-controls="addChartCanvas">
+                                        <p id="cartNo"></p><i class="fa-solid fa-cart-shopping"
+                                            style="color: #4B1EB1;"></i>
+                                        My Cart
+                                    </button>
                                 </a>
                             </li>
                         </ul>
@@ -68,8 +71,8 @@
     <!-- offCanva -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="addChartCanvas" aria-labelledby="addChartCanvasLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="addChartCanvasLabel">Your Cart</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title" id="addChartCanvasLabel">Your Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <ul class="cartList">
@@ -80,8 +83,9 @@
                 <p class="cartTotalPricePara"></p>
             </div>
         </div>
-      </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
     <script src="app2.js" type="module"></script>
