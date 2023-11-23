@@ -74,7 +74,7 @@ async function addToChart(productId, productTitle, productPrice, productImg) {
 
 
 cartBtn.addEventListener("click", () => {
-    
+
     cartList.innerHTML = "";
     let cartTotalPrice = 0;
 
@@ -99,7 +99,7 @@ cartBtn.addEventListener("click", () => {
                         </div>
                     </div>
                     <div class="cartProductPrice">
-                        <p id="cartProductPricePara">$${cartProductPrice}</p>
+                        <p id="cartProductPricePara">$${cartProductPrice.toFixed(2)}</p>
                     </div>
                 </li>
                 `
