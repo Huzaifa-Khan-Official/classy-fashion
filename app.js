@@ -382,19 +382,19 @@ womensClothing.addEventListener("click", () => {
 })
 
 
-function addToChart(productId) {
-    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
-    let singleProduct = {
-        productId: productId
-    }
-    cartProductIds.push(singleProduct)
-    localStorage.setItem("cartProductIds", JSON.stringify(cartProductIds))
+// function addToChart(productId) {
+//     let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
+//     let singleProduct = {
+//         productId: productId
+//     }
+//     cartProductIds.push(singleProduct)
+//     localStorage.setItem("cartProductIds", JSON.stringify(cartProductIds))
 
 
-    let cartQuant = cartProductIds.length;
-    cartNoPara.style.display = "flex";
-    cartNoPara.innerHTML = `${cartQuant}`
-}
+//     let cartQuant = cartProductIds.length;
+//     cartNoPara.style.display = "flex";
+//     cartNoPara.innerHTML = `${cartQuant}`
+// }
 
 if (cartQuant) {
     cartNoPara.style.display = "flex";
@@ -442,4 +442,4 @@ cartBtn.addEventListener("click", () => {
 })
 
 
-window.addToChart = addToChart
+// window.addToChart = addToChart
