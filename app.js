@@ -1,10 +1,6 @@
 const containerDiv = document.querySelector(".containerDiv")
 const cartList = document.querySelector(".cartList")
 const home = document.querySelector("#home");
-const cartNoPara = document.querySelector("#cartNo");
-let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || []; // geting cartProductIds from storage
-
-let cartQuant = cartProductIds.length;
 
 let ratingZero = `<i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i><i class="fa-regular fa-star" style="color: #18C8A8;"></i>`;
 
@@ -79,7 +75,7 @@ const homeFunc = () => {
                             </div>
                             <div><p>${ratingIcons} ${productRating}/5 (${productRatingCount})</p></div>
                             <div class="btnDiv mt-3">                    
-                                <button class="btn btn-primary" onclick="addToChart(${productId})">Add to chart</button>
+                                <button class="btn btn-primary" onclick="addToChart(${productId}, '${productTitle}', '${productPrice}', '${productImg}')">Add to chart</button>
                             </div>
                         </div>
                     </div>
@@ -380,66 +376,3 @@ womensClothing.addEventListener("click", () => {
         })
         .catch(err => console.log(err));
 })
-
-
-// function addToChart(productId) {
-//     let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
-//     let singleProduct = {
-//         productId: productId
-//     }
-//     cartProductIds.push(singleProduct)
-//     localStorage.setItem("cartProductIds", JSON.stringify(cartProductIds))
-
-
-//     let cartQuant = cartProductIds.length;
-//     cartNoPara.style.display = "flex";
-//     cartNoPara.innerHTML = `${cartQuant}`
-// }
-
-if (cartQuant) {
-    cartNoPara.style.display = "flex";
-    cartNoPara.innerHTML = `${cartQuant}`
-}
-
-const cartBtn = document.getElementById("cartBtn");
-let cartTotalPrice = 0;
-
-cartBtn.addEventListener("click", () => {
-    let cartProductIds = JSON.parse(localStorage.getItem("cartProductIds")) || [];
-    console.log(cartProductIds);
-    let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
-
-    cartProductIds.forEach((currCartProduct) => {
-        fetch(`https://fakestoreapi.com/products/${currCartProduct.productId}`)
-            .then(res => res.json())
-            .then(data => {
-                const currentProduct = data
-                const cartProductImg = currentProduct.image;
-                const cartProductTitle = currentProduct.title;
-                const cartProductPrice = currentProduct.price;
-                cartTotalPrice += cartProductPrice;
-
-                cartList.innerHTML += `
-                <li class="cartProductList mt-3">
-                    <div class="cartProductDetailDiv">
-                        <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
-                        <div class="cartProductImgDiv">
-                            <img src="${cartProductImg}" alt="">
-                        </div>
-                        <div class="cartProductTitle">
-                            <p id="cartProductTitlePara">${cartProductTitle}</p>
-                        </div>
-                    </div>
-                    <div class="cartProductPrice">
-                        <p id="cartProductPricePara">$${cartProductPrice}</p>
-                    </div>
-                </li>
-                `
-                cartTotalPricePara.innerHTML = `$${cartTotalPrice}`
-            })
-            .catch(err => console.log(err));
-    });
-})
-
-
-// window.addToChart = addToChart
