@@ -157,3 +157,90 @@ p {
     color: #d02c2c !important;
     transform: scale(1.2);
 }
+
+
+@media (max-width: 435px) {
+    .card {
+        width: 150px;
+    }
+    .card img {
+        height: 150px;
+    }
+    .descDiv  {
+        height: 192px;
+    }
+    .titleDiv {
+        height: 90px;
+    }
+    .containerDiv {
+        gap: 0 !important;
+    }
+}
+
+@media (max-width:340px) {
+    .containerDiv {
+        gap: 10px !important;
+    }
+}
+
+@media (max-width: 329px) {
+    .card {
+        width: 90%;
+    }
+    .card img {
+        height: 80%;
+    }
+    .card-body {
+        padding-top: 0;
+    }
+
+    .p-2 {
+        padding-bottom: 0 !important;
+    }
+    .titleDiv  {
+        height: 37px;
+    }
+
+    .descDiv  {
+        height: 105px;
+    }
+}
+
+@media (max-width: 315px) {
+    .titleDiv  {
+        height: 50px;
+    }
+}
+
+@media (max-width: 275px) {
+    .descDiv {
+        height: 120px;
+    }
+}
+
+@media (max-width: 226px) {
+    .titleDiv {
+        height: 80px;
+    }
+}
+
+@media (max-width: 228px) {
+    .descDiv {
+        height: 145px;
+    }
+}
+
+@media (max-width: 217px) {
+    .descDiv {
+        height: 160px;
+    }
+}
+
+@media (max-width: 192px) {
+    .descDiv {
+        height: 200px;
+    }
+    .titleDiv {
+        height: 100px;
+    }
+}
