@@ -15,6 +15,30 @@ let ratingFour = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i cla
 
 let ratingFive = `<i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i><i class="fa-solid fa-star" style="color: #18C8A8;"></i>`;
 
+const productRatingFunc = (productRating) => {
+        // rating 1
+    if (productRating == 1) {
+        finalRatingIcons = ratingOne;
+    } else if (productRating == 2) {
+        // rating 2
+        finalRatingIcons = ratingTwo;
+    } else if (productRating == 3) {
+        // rating 3
+        finalRatingIcons = ratingThree;
+    } else if (productRating == 4) {
+        // rating 4
+        finalRatingIcons = ratingFour;
+    } else if (productRating == 5) {
+        // rating 5
+        finalRatingIcons = ratingFive;
+    } else {
+        // rating 0
+        finalRatingIcons = ratingZero;
+    }
+
+    return finalRatingIcons
+}
+
 const homeFunc = () => {
     fetch('https://fakestoreapi.com/products')
         .then(res => res.json())
@@ -36,27 +60,9 @@ const homeFunc = () => {
                 const productCategory = currentProduct.category;
                 const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
-                let ratingIcons;
+                const ratingIcons = productRatingFunc(productRating);
 
-                // rating 1
-                if (productRating == 1) {
-                    ratingIcons = ratingOne;
-                } else if (productRating == 2) {
-                    // rating 2
-                    ratingIcons = ratingTwo;
-                } else if (productRating == 3) {
-                    // rating 3
-                    ratingIcons = ratingThree;
-                } else if (productRating == 4) {
-                    // rating 4
-                    ratingIcons = ratingFour;
-                } else if (productRating == 5) {
-                    // rating 5
-                    ratingIcons = ratingFive;
-                } else {
-                    // rating 0
-                    ratingIcons = ratingZero;
-                }
+
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
         })
@@ -96,27 +102,7 @@ electronics.addEventListener("click", () => {
                 const productCategory = currentProduct.category;
                 const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
-                let ratingIcons;
-
-                // rating 1
-                if (productRating == 1) {
-                    ratingIcons = ratingOne;
-                } else if (productRating == 2) {
-                    // rating 2
-                    ratingIcons = ratingTwo;
-                } else if (productRating == 3) {
-                    // rating 3
-                    ratingIcons = ratingThree;
-                } else if (productRating == 4) {
-                    // rating 4
-                    ratingIcons = ratingFour;
-                } else if (productRating == 5) {
-                    // rating 5
-                    ratingIcons = ratingFive;
-                } else {
-                    // rating 0
-                    ratingIcons = ratingZero;
-                }
+                const ratingIcons = productRatingFunc(productRating);
 
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
@@ -145,27 +131,7 @@ jewelery.addEventListener("click", () => {
                 const productCategory = currentProduct.category;
                 const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
-                let ratingIcons;
-
-                // rating 1
-                if (productRating == 1) {
-                    ratingIcons = ratingOne;
-                } else if (productRating == 2) {
-                    // rating 2
-                    ratingIcons = ratingTwo;
-                } else if (productRating == 3) {
-                    // rating 3
-                    ratingIcons = ratingThree;
-                } else if (productRating == 4) {
-                    // rating 4
-                    ratingIcons = ratingFour;
-                } else if (productRating == 5) {
-                    // rating 5
-                    ratingIcons = ratingFive;
-                } else {
-                    // rating 0
-                    ratingIcons = ratingZero;
-                }
+                const ratingIcons = productRatingFunc(productRating);
 
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
@@ -194,27 +160,7 @@ mensClothing.addEventListener("click", () => {
                 const productCategory = currentProduct.category;
                 const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
-                let ratingIcons;
-
-                // rating 1
-                if (productRating == 1) {
-                    ratingIcons = ratingOne;
-                } else if (productRating == 2) {
-                    // rating 2
-                    ratingIcons = ratingTwo;
-                } else if (productRating == 3) {
-                    // rating 3
-                    ratingIcons = ratingThree;
-                } else if (productRating == 4) {
-                    // rating 4
-                    ratingIcons = ratingFour;
-                } else if (productRating == 5) {
-                    // rating 5
-                    ratingIcons = ratingFive;
-                } else {
-                    // rating 0
-                    ratingIcons = ratingZero;
-                }
+                const ratingIcons = productRatingFunc(productRating);
 
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
@@ -243,27 +189,7 @@ womensClothing.addEventListener("click", () => {
                 const productCategory = currentProduct.category;
                 const productRating = Math.round(currentProduct.rating.rate);
                 const productRatingCount = currentProduct.rating.count;
-                let ratingIcons;
-
-                // rating 1
-                if (productRating == 1) {
-                    ratingIcons = ratingOne;
-                } else if (productRating == 2) {
-                    // rating 2
-                    ratingIcons = ratingTwo;
-                } else if (productRating == 3) {
-                    // rating 3
-                    ratingIcons = ratingThree;
-                } else if (productRating == 4) {
-                    // rating 4
-                    ratingIcons = ratingFour;
-                } else if (productRating == 5) {
-                    // rating 5
-                    ratingIcons = ratingFive;
-                } else {
-                    // rating 0
-                    ratingIcons = ratingZero;
-                }
+                const ratingIcons = productRatingFunc(productRating);
 
                 displayCards(productId, productImg, productTitle, productPrice, productDesc, ratingIcons, productRating, productRatingCount);
             });
